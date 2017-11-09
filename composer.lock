@@ -4,31 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "68b4600c2d52f3c91195317bf1066552",
+    "content-hash": "16d29652cfbffddb7034cbe26d3a01e0",
     "packages": [
-        {
-            "name": "brewerydb/brewerydb",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hasanagha/brewerydb.git",
-                "reference": "0f1d916e1552cdd59704063b4eccf9d6f67a7276"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hasanagha/brewerydb/zipball/0f1d916e1552cdd59704063b4eccf9d6f67a7276",
-                "reference": "0f1d916e1552cdd59704063b4eccf9d6f67a7276",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "brewerydb\\BreweryDB": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "time": "2016-09-03T15:26:31+00:00"
-        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",
@@ -1993,9 +1970,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "brewerydb/brewerydb": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

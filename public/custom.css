@@ -1,0 +1,46 @@
+/**
+ * Common styles
+ */
+[v-cloak] {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+/**
+ * Page styles
+ */
+.container {
+    margin: 2em auto;
+}
+
+.random-beer {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 1em;
+}
+
+.random-beer__link {
+    margin-top: 1em;
+}
+
+.search-form,
+.search-results {
+    margin-top: 2em;
+}
+
+.search-form__loader {
+    margin-top: 10px;
+}
+
+.search-results__item + .search-results__item {
+    border-top: 1px solid #ccc;
+    margin-bottom: 1em;
+    padding-top: 2em;
+}
+
+.search-result__image {
+    width: 100%;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Distilled SCH Beer Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="custom.css">
+</head>
+
+<body>
+    <div class="container" id="app">
+        <h1>Distilled SCH Beer Application</h1>
+
+        <!-- Random beer with picture -->
+        <section class="random-beer" v-cloak>
+            <!--<h4>Samuel Adams Cream Stout</h4>-->
+            <h4>{{ randomBeer.name }}</h4>
+            <div class="row">
+                <img class="three columns" :src="randomBeer.labels.medium">&nbsp;
+                <article class="nine columns">
+                    <p>{{ randomBeer.description }}</p>
+                    <button class="random-beer__link" @click.prevent="getAnotherRandomBeer">Another beer</button>
+                    <button class="random-beer__link" @click.prevent="searchFromThisBrewery">More from this brewery</button>
+                    <img v-show="isRequestInProgress" src="ajax-loader.gif" alt="loader">
+                </article>
+            </div>
+        </section>
+        <!-- ./Random beer -->
+
+        <!-- Search form -->
+        <form class="search-form" @submit.prevent="search">
+            <h4>Search</h4>
+            <div class="row">
+                <div class="four columns">
+                    <label>
+                        <input
+                                class="u-full-width"
+                                type="text"
+                                placeholder="Search"
+                                name="q"
+                                required
+                                v-model="searchQuery">
+                    </label>
+                </div>
+                <div class="three columns">
+                    <label>
+                        <select class="u-full-width" name="type" required v-model="searchType">
+                            <option value="beer">Beer</option>
+                            <option value="brewery">Brewery</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="three columns">
+                    <input class="button-primary" type="submit" value="Search">
+                </div>
+                <div class="two columns search-form__loader" v-show="isSearchInProgress">
+                    <img src="ajax-loader.gif" alt="loader">
+                </div>
+            </div>
+        </form>
+        <!-- ./Search form -->
+
+        <!-- Search results -->
+        <section class="search-results" v-show="isSearchResultsVisible">
+            <h4>Search results</h4>
+
+            <div class="row search-results__item" v-for="item in searchResults" :key="item.id">
+                <div class="three columns" v-show="'beer' === searchType">
+                    <img class="search-result__image" v-if="item.hasOwnProperty('labels')" :src="item.labels.medium">&nbsp;
+                </div>
+                <div class="nine columns">
+                    <strong>{{ item.name }}</strong>
+                    <article>{{ item.description }}</article>
+                </div>
+            </div>
+            <p v-show="searchResults.length < 1"><i>No results found</i></p>
+        </section>
+        <!-- ./Search results -->
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="custom.js"></script>
+</body>
+
+</html>

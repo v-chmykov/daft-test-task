@@ -4,16 +4,12 @@ return [
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
 
-        // view - twig
-        'view' => [
-            'cache' => 'cache/twig'
-        ],
+        // brewerydb API key
+        'brewery_key' => 'f33468a64c722b55f8efed37f0cf6f5c',
 
-        // Monolog settings
-        'logger' => [
-            'name' => 'slim-app',
-            'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
-            'level' => \Monolog\Logger::DEBUG,
+        // Renderer settings
+        'renderer' => [
+            'template_path' => __DIR__ . '/../templates/',
         ],
     ],
 ];

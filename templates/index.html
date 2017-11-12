@@ -21,8 +21,8 @@
                 <img class="three columns" :src="randomBeer.labels.medium">&nbsp;
                 <article class="nine columns">
                     <p>{{ randomBeer.description }}</p>
-                    <button class="random-beer__link" @click.prevent="getAnotherRandomBeer">Another beer</button>
-                    <button class="random-beer__link" @click.prevent="searchFromThisBrewery">More from this brewery</button>
+                    <button class="random-beer__link" @click="getAnotherRandomBeer">Another beer</button>
+                    <button class="random-beer__link" @click="getFromThisBrewery">More from this brewery</button>
                     <img v-show="isRequestInProgress" src="ajax-loader.gif" alt="loader">
                 </article>
             </div>

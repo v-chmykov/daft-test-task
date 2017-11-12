@@ -12,7 +12,10 @@ function init() {
                     description: '',
                     labels: {
                         medium: ''
-                    }
+                    },
+                    breweries: [{
+                        name: ''
+                    }]
                 },
                 searchResults: []
             };
@@ -35,9 +38,11 @@ function init() {
                     });
             },
             getFromThisBrewery: function() {
-                console.log('click');
+                this.searchQuery = this.randomBeer.breweries[0].name;
+                this.searchType = 'brewery';
+                this.search();
             },
-            search: function () {
+            search: function() {
                 var self = this;
                 var queryParams = {
                     q: self.searchQuery,
@@ -46,7 +51,7 @@ function init() {
 
                 self.isSearchInProgress = true;
                 axios.get('/api/search', { params: queryParams })
-                    .then(function (response) {
+                    .then(function(response) {
                         self.isSearchInProgress = false;
                         self.isSearchResultsVisible = true;
 
@@ -57,7 +62,7 @@ function init() {
                             self.searchResults = [];
                         }
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         alert("Error, see 'console' for details");
                         console.log(error);
                     });

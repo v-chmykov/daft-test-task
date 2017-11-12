@@ -7,17 +7,14 @@ function init() {
                 isSearchResultsVisible: false,
                 searchQuery: '',
                 searchType: 'beer',
-                randomBeer: {
-                    name: '',
-                    description: '',
-                    labels: {
-                        medium: ''
-                    },
-                    breweries: [{
-                        name: ''
-                    }]
+                randomBeerResponse: {
+                    data: {},
+                    status: ''
                 },
-                searchResults: []
+                searchResponse: {
+                    data: {},
+                    status: ''
+                }
             };
         },
         created: function() {
@@ -29,7 +26,7 @@ function init() {
                 self.isRequestInProgress = true;
                 axios.get('/api/random-beer')
                     .then(function(response) {
-                        self.randomBeer = response.data.data;
+                        self.randomBeerResponse = response.data;
                         self.isRequestInProgress = false;
                     })
                     .catch(function(error) {
@@ -54,18 +51,41 @@ function init() {
                     .then(function(response) {
                         self.isSearchInProgress = false;
                         self.isSearchResultsVisible = true;
-
-                        if (response.data.hasOwnProperty('data')) {
-                            console.log(response.data.data);
-                            self.searchResults = response.data.data;
-                        } else {
-                            self.searchResults = [];
-                        }
+                        self.searchResponse = response.data;
+                        console.log(response.data);
                     })
                     .catch(function(error) {
                         alert("Error, see 'console' for details");
                         console.log(error);
                     });
+            }
+        },
+        computed: {
+            randomBeer: function() {
+                if ('success' === this.randomBeerResponse.status) {
+                    return this.randomBeerResponse.data;
+                }
+
+                // Default value                
+                return {
+                    name: '',
+                    description: '',
+                    labels: {
+                        medium: ''
+                    },
+                    breweries: [{
+                        name: ''
+                    }]
+                };
+            },
+            searchResults: function() {
+                if ('success' == this.searchResponse.status &&
+                    this.searchResponse.hasOwnProperty('data')) {
+                    return this.searchResponse.data;
+                }
+
+                // Default value
+                return [];
             }
         }
     }).$mount('#app');
